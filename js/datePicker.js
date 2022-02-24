@@ -1,5 +1,6 @@
 
 var temp = true;
+var firstDay = -1;
 //是否選擇中狀態
 function select() {
   temp = !temp;
@@ -36,6 +37,8 @@ function getDays(select) {
       let days = new Date(yearSelect.value, monthSelect.value, 0).getDate();
       daySelect.options.length = 1;
       createOption(1, days, daySelect);
+      firstDay = new Date(yearSelect.value, monthSelect.value - 1, 1).getDay();
+      console.log(firstDay);
     }
   });
 }
@@ -44,6 +47,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const monthSelect = document.getElementById('monthSelect');
   const daySelect = document.getElementById('daySelect');
   const dateChoose = document.getElementById('dateChoose');
+  const week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const table = document.createElement('table');
+  const tr = document.createElement('tr');
+  const calendar = document.getElementById("calendar");
+  //select部分
   dateChoose.innerText = "請選擇日期";
   createOption(2010, 2025, yearSelect);
   createOption(1, 12, monthSelect);
@@ -68,6 +76,35 @@ document.addEventListener("DOMContentLoaded", function () {
         alert("請先選擇月份") :
         select();
   });
+  //日曆部份
+  // document.addEventListener('click', function () {
+  //   if (daySelect.value) {
+  //     calendar.appendChild(table);
+  //     table.appendChild(tr);
+  //     for (const i of week) {
+  //       let th = document.createElement('th');
+  //       th.innerText = i;
+  //       tr.appendChild(th);
+  //     }
+  //   }
+  // })
+  calendar.appendChild(table);
+  table.appendChild(tr);
+  let newTable = document.getElementsByTagName('table');
+  const td = document.createElement('td');
+  for (const i of week) {
+    let th = document.createElement('th');
+    th.innerText = i;
+    tr.appendChild(th);
+  }
+  // for (let i = 0; i < 5; i++) {
+  newTable.appendChild(tr);
+  // for (let j = 0; j < 7; j++) {
+  //   td.innerText = j
+  //   tr.appendChild(td);
+
+  // }
+  // }
 });
 
 

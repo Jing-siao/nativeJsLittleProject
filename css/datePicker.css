@@ -1,8 +1,36 @@
-select .hide {
+body {
+  height: calc(100vh - 40px);
+  background: -webkit-gradient(linear, left bottom, left top, from(#8e9eab), to(#eef2f3));
+  background: linear-gradient(to top, #8e9eab, #eef2f3);
+  padding: 20px;
+}
+
+div.out {
+  margin: 20px 5px;
+}
+
+div.out select .hide {
   display: none;
 }
 
-.dateChoose {
+div.out .dateChoose {
   display: inline-block;
+}
+
+div.out table {
+  margin-top: 20px;
+  border-radius: 10px;
+  background-color: white;
+}
+
+div.out table th {
+  padding: 10px;
+  color: #376692;
+  font-weight: 600;
+}
+
+div.out table td {
+  padding: 10px;
+  text-align: center;
 }
 /*# sourceMappingURL=datePicker.css.map */
