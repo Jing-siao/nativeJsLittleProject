@@ -86,38 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let tableElement = document.getElementsByTagName('table').length;
     if (tableElement > 0) {
       document.getElementById('tableId').remove();
-      let k = 0;
-      for (var i = 0; i < rows; i++) {
-        var trNode = tableNode.insertRow();
-        if (i === 0) {
-          for (const k of week) {
-            let th = document.createElement('th');
-            th.innerText = k;
-            trNode.appendChild(th);
-          }
-        } else {
-          // for (let y = 1; y <= 7; y++) {
-          //   let tdNode = trNode.insertCell();
-          //   let date = ((i - 1) * 7) + y;
-          //   date > days ?
-          //     tdNode.innerHTML = '' :
-          //     tdNode.innerHTML = date;
-          // }
-          for (let y = 0; y < 7; y++) {
-            let tdNode = trNode.insertCell();
-            k++;
-            if (k < firstDay || k > days) {
-              tdNode.innerHTML = ''
-            } else {
-              tdNode.innerHTML = k;
-            }
-
-          }
-        }
-      }
-      calendar.appendChild(tableNode);
-    } else {
-      let k = 0;
+      let count = 0;
       for (var i = 0; i < rows + 1; i++) {
         var trNode = tableNode.insertRow();
         if (i === 0) {
@@ -127,25 +96,41 @@ document.addEventListener("DOMContentLoaded", function () {
             trNode.appendChild(th);
           }
         } else {
-          // for (let y = 1; y <= 7; y++) {
-          //   let tdNode = trNode.insertCell();
-          //   let date = ((i - 1) * 7) + y;
-          //   date > days ?
-          //     tdNode.innerHTML = '' :
-          //     tdNode.innerHTML = date;
-          //   // if (i < firstDay) {
-          //   //   tdNode.innerHTML = ''
-          //   // } else {
-          //   //   tdNode.innerHTML = date;
-          //   // }
-          // }
           for (let y = 0; y < 7; y++) {
             let tdNode = trNode.insertCell();
-            k++;
-            if (k < firstDay || k > days) {
+            count++;
+            if (count < firstDay + 1 || count > days + firstDay) {
               tdNode.innerHTML = ''
+              console.log(count)
             } else {
-              tdNode.innerHTML = k;
+              console.log("true", count)
+              tdNode.innerHTML = count - firstDay;
+            }
+
+          }
+        }
+      }
+      calendar.appendChild(tableNode);
+    } else {
+      let count = 0;
+      for (var i = 0; i < rows + 1; i++) {
+        var trNode = tableNode.insertRow();
+        if (i === 0) {
+          for (const k of week) {
+            let th = document.createElement('th');
+            th.innerText = k;
+            trNode.appendChild(th);
+          }
+        } else {
+          for (let y = 0; y < 7; y++) {
+            let tdNode = trNode.insertCell();
+            count++;
+            if (count < firstDay + 1 || count > days + firstDay) {
+              tdNode.innerHTML = ''
+              console.log(count)
+            } else {
+              console.log("true", count)
+              tdNode.innerHTML = count - firstDay;
             }
 
           }
