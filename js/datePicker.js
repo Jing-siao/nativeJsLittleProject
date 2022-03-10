@@ -42,16 +42,44 @@ function getDays(select) {
       createOption(1, days, daySelect);
       firstDay = new Date(yearSelect.value, monthSelect.value - 1, 1).getDay();
       rows = Math.ceil((firstDay + days) / 7);
-      console.log(firstDay);
+      // console.log(firstDay);
     }
   });
-}
+};
+//生成日曆
+function createCalendar(table,newCalendar) {
+  let count = 0;
+  const week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      for (let i = 0; i < rows + 1; i++) {
+        let trNode = table.insertRow();
+        if (i === 0) {
+          for (const k of week) {
+            let th = document.createElement('th');
+            th.innerText = k;
+            trNode.appendChild(th);
+          }
+        } else {
+          for (let y = 0; y < 7; y++) {
+            let tdNode = trNode.insertCell();
+            count++;
+            count < firstDay + 1 || count > days + firstDay?
+              tdNode.innerHTML = '':
+              tdNode.innerHTML = count - firstDay;
+            if (tdNode.innerHTML === daySelect.value) {
+                tdNode.classList.add('tdActive');
+            }
+          }
+        }
+      }
+      newCalendar.appendChild(table);
+};
+
 document.addEventListener("DOMContentLoaded", function () {
   const yearSelect = document.getElementById('yearSelect');
   const monthSelect = document.getElementById('monthSelect');
   const daySelect = document.getElementById('daySelect');
   const dateChoose = document.getElementById('dateChoose');
-  const week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
 
   //select部分
   dateChoose.innerText = "請選擇日期";
@@ -86,61 +114,10 @@ document.addEventListener("DOMContentLoaded", function () {
     let tableElement = document.getElementsByTagName('table').length;
     if (tableElement > 0) {
       document.getElementById('tableId').remove();
-      let count = 0;
-      for (var i = 0; i < rows + 1; i++) {
-        var trNode = tableNode.insertRow();
-        if (i === 0) {
-          for (const k of week) {
-            let th = document.createElement('th');
-            th.innerText = k;
-            trNode.appendChild(th);
-          }
-        } else {
-          for (let y = 0; y < 7; y++) {
-            let tdNode = trNode.insertCell();
-            count++;
-            if (count < firstDay + 1 || count > days + firstDay) {
-              tdNode.innerHTML = ''
-              console.log(count)
-            } else {
-              console.log("true", count)
-              tdNode.innerHTML = count - firstDay;
-            }
-
-          }
-        }
-      }
-      calendar.appendChild(tableNode);
+      createCalendar(tableNode,calendar);
     } else {
-      let count = 0;
-      for (var i = 0; i < rows + 1; i++) {
-        var trNode = tableNode.insertRow();
-        if (i === 0) {
-          for (const k of week) {
-            let th = document.createElement('th');
-            th.innerText = k;
-            trNode.appendChild(th);
-          }
-        } else {
-          for (let y = 0; y < 7; y++) {
-            let tdNode = trNode.insertCell();
-            count++;
-            if (count < firstDay + 1 || count > days + firstDay) {
-              tdNode.innerHTML = ''
-              console.log(count)
-            } else {
-              console.log("true", count)
-              tdNode.innerHTML = count - firstDay;
-            }
-
-          }
-        }
-      }
-      calendar.appendChild(tableNode);
+      createCalendar(tableNode,calendar);
     }
-
-
-
   });
 
 

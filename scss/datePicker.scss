@@ -3,28 +3,58 @@ body {
   background: linear-gradient(to top, rgb(142, 158, 171), rgb(238, 242, 243));
   padding: 20px;
 }
+
 div.out {
   margin: 20px 5px;
+
   select {
+    padding: 8px 5px;
+    margin: 0 5px;
+    border-radius: 5px;
+    // background-color: rgba(113, 128, 155, 0.733);
+    border: none;
+    color: rgb(54, 54, 54);
+    outline: none;
+
     .hide {
       display: none;
     }
+
+    option {
+      border: none;
+      list-style: none;
+      padding: 10px;
+      margin: 10px;
+      height: 30px;
+    }
   }
+
   .dateChoose {
     display: inline-block;
   }
+
   table {
     margin-top: 20px;
     border-radius: 10px;
-    background-color: white;
+    background: linear-gradient(rgb(178, 223, 253) 20%, white 15%);
+    padding: 0 10px 10px;
+    display: inline-block;
+
     th {
-      padding: 10px;
+      padding: 15px 10px;
       color: rgb(55, 102, 146);
       font-weight: 600;
+
     }
+
     td {
-      padding: 10px;
+      padding: 8px 5px;
       text-align: center;
+
+      &.tdActive {
+        background-color: rgb(178, 223, 253);
+        border-radius: 50%;
+      }
     }
   }
 }
